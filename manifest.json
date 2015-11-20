@@ -3,7 +3,7 @@
 	"id": "H5926F243",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "前端老徐",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.0",/*应用版本名称*/
+		"name": "1.0.1",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -181,11 +181,11 @@
 					}
 				},
 				"android": {
-					"mdpi": "C:/Users/loveqiao/Desktop/splash240x282.png", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "C:/Users/loveqiao/Desktop/splash320x442.png", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/loveqiao/Desktop/splash480x762.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/loveqiao/Desktop/splash720x1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/loveqiao/Desktop/splash1080x1882.png"
+					"mdpi": "img/splash240x282.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "img/splash320x442.png", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "img/splash480x762.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "img/splash720x1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "img/splash1080x1882.png"
 				}
 			}
 		}
