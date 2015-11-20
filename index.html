@@ -19,14 +19,14 @@
 	        <span class="mui-icon mui-icon-weibo"></span>
 	        <span class="mui-tab-label">老徐微博</span>
 	    </a>
-	    <a class="mui-tab-item" href="http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v6"> 
+	    <a class="mui-tab-item" href="http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v7"> 
 	        <span class="mui-icon mui-icon-contact"></span>
 	        <span class="mui-tab-label">关于老徐</span>
 	    </a>
 	</nav>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
-			var subpages = ['http://www.loveqiao.com', 'http://weibo.com/qdlaoxu', 'http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v6'];
+			var subpages = ['http://www.loveqiao.com', 'http://weibo.com/qdlaoxu', 'http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v7'];
 			var subpage_style = {
 				top: '0',
 				bottom: '51px'
@@ -34,6 +34,10 @@
 			var aniShow = {};
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+				plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
+				setTimeout(function(){
+					plus.nativeUI.closeWaiting();
+				},1500);
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 3; i++) {
 					var temp = {};
