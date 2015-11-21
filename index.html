@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>前端老徐</title>
     <link href="css/mui.min.css" rel="stylesheet"/>
+    <style type="text/css">
+    	body{background:#222;}
+    	.mui-bar{box-shadow: 0 0 1px #999 inset;}
+    	.copyright{text-align: center;padding: 20px 0; line-height: 1;}
+    </style>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav">
-	    <h1 class="mui-title" id="title">老徐BLOG</h1>
-	</header>
+	<div class="copyright">
+	    <p>前端老徐版权所有</p>
+	    <p>Blog：www.loveqiao.com</p>
+	</div>
 	<nav class="mui-bar mui-bar-tab">
 	    <a class="mui-tab-item mui-active" href="http://www.loveqiao.com">
 	        <span class="mui-icon mui-icon-home"></span>
@@ -19,38 +25,38 @@
 	        <span class="mui-icon mui-icon-weibo"></span>
 	        <span class="mui-tab-label">老徐微博</span>
 	    </a>
-	    <a class="mui-tab-item" href="http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v7"> 
+	    <a class="mui-tab-item" href="http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v10"> 
 	        <span class="mui-icon mui-icon-contact"></span>
 	        <span class="mui-tab-label">关于老徐</span>
 	    </a>
 	</nav>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
-			var subpages = ['http://www.loveqiao.com', 'http://weibo.com/qdlaoxu', 'http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v7'];
+			var subpages = ['http://www.loveqiao.com', 'http://weibo.com/qdlaoxu', 'http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v10'];
 			var subpage_style = {
 				top: '0',
-				bottom: '51px'
+				bottom: '50px'
 			};
 			var aniShow = {};
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
 				plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
-				setTimeout(function(){
-					plus.nativeUI.closeWaiting();
-				},1500);
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 3; i++) {
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					sub.setBounce({position:{top:"100px"},changeoffset:{top:"0"}});
 					if (i > 0) {
 						sub.hide();
+					}else{
+						sub.evalJS('plus.nativeUI.closeWaiting()');
 					}
 					self.append(sub);
 				}
 			});
 			 //当前激活选项
 			var activeTab = subpages[0];
-			var title = document.getElementById("title");
+			//var title = document.getElementById("title");
 			 //选项卡点击事件
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
@@ -58,7 +64,7 @@
 					return;
 				}
 				//更换标题
-				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+				//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
 				//显示目标选项卡
 				if(mui.os.ios||aniShow[targetTab]){
 					plus.webview.show(targetTab);
