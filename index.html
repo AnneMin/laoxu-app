@@ -40,12 +40,28 @@
 			var aniShow = {};
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+				document.addEventListener( "netchange", function () {
+					var nt = plus.networkinfo.getCurrentType();
+					switch ( nt ) {
+						case plus.networkinfo.CONNECTION_ETHERNET:
+						case plus.networkinfo.CONNECTION_WIFI:
+						case plus.networkinfo.CONNECTION_CELL2G:
+						case plus.networkinfo.CONNECTION_CELL3G:
+						case plus.networkinfo.CONNECTION_CELL4G:
+						for (var n=0;n<3;n++) {//网络接通后重新加载页面
+							plus.webview.getWebviewById(subpages[n]).loadURL(subpages[n]);
+						}
+						break; 
+						default:
+						//alert("没有网络!"); 
+						break;
+					}
+				}, false ); 
 				//plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 3; i++) {
-					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
-					sub.setBounce({position:{top:"100px"},changeoffset:{top:"0"}});
+					sub.setBounce({position:{top:"100px"},changeoffset:{top:"0"}});//回弹效果
 					if (i > 0) {
 						sub.hide();
 					}else{
