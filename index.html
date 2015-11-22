@@ -70,10 +70,12 @@
 				if(mui.os.ios||aniShow[targetTab]){
 					plus.webview.show(targetTab);
 				}else{
+					plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
 					var temp = {};
 					temp[targetTab] = "true";
 					mui.extend(aniShow,temp);
 					plus.webview.show(targetTab,"fade-in",300);
+					plus.webview.getWebviewById(targetTab).evalJS('plus.nativeUI.closeWaiting()');
 				}
 				//隐藏当前;
 				plus.webview.hide(activeTab);
