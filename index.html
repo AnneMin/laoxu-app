@@ -40,7 +40,7 @@
 			var aniShow = {};
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
-				plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
+				//plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 3; i++) {
 					var temp = {};
@@ -49,7 +49,8 @@
 					if (i > 0) {
 						sub.hide();
 					}else{
-						sub.evalJS('plus.nativeUI.closeWaiting()');
+						//sub.evalJS('plus.nativeUI.closeWaiting()');
+						sub.evalJS('plus.navigator.closeSplashscreen()');
 					}
 					self.append(sub);
 				}
