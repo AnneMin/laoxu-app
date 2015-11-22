@@ -50,6 +50,9 @@
 						sub.hide();
 					}else{
 						//sub.evalJS('plus.nativeUI.closeWaiting()');
+						var temp = {};
+						temp[subpages[i]] = "true";
+						mui.extend(aniShow,temp);
 						sub.evalJS('plus.navigator.closeSplashscreen()');
 					}
 					self.append(sub);
