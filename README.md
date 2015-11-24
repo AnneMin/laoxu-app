@@ -13,3 +13,6 @@ app基于老徐博客设计的一款个人安卓app软件，里面目前设有�
 <li>点击选项卡添加loading动画待页面加载完毕后关闭loading</li>
 <li>解决没有网络打开app后如果用户打开wifi后自动刷新页面</li>
 </ol>
+# App下载
+![image](https://github.com/waihaolaoxu/laoxu-app/blob/master/app.png) 
+
