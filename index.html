@@ -48,16 +48,20 @@
 						case plus.networkinfo.CONNECTION_CELL2G:
 						case plus.networkinfo.CONNECTION_CELL3G:
 						case plus.networkinfo.CONNECTION_CELL4G:
-						for (var n=0;n<3;n++) {//网络接通后重新加载页面
-							plus.webview.getWebviewById(subpages[n]).loadURL(subpages[n]);
-						}
+							localStorage.setItem('net',true);
+							plus.nativeUI.toast('已连接至网络');
+							for (var n=0;n<3;n++) {//网络接通后重新加载页面
+								plus.webview.getWebviewById(subpages[n]).loadURL(subpages[n]);
+							}
 						break; 
 						default:
-						//alert("没有网络!"); 
+							localStorage.setItem('net',false);
+							plus.nativeUI.toast('没有网络');
 						break;
 					}
 				}, false ); 
-				//plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
+				mui.trigger(document,'netchange');
+				
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 3; i++) {
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
