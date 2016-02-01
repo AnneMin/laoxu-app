@@ -3,7 +3,7 @@
 	"id": "H5926F243",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "前端老徐",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.3",/*应用版本名称*/
+		"name": "1.0.4",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -12,9 +12,9 @@
 	},
 	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
-		"name": "",/*开发者名称*/
-		"email": "",/*开发者邮箱地址*/
-		"url": "http://www.dcloud.io"
+		"name": "前端老徐",/*开发者名称*/
+		"email": "442413729@qq.com",/*开发者邮箱地址*/
+		"url": "http://www.loveqiao.com"
 	},
 	"permissions": {
 		"Accelerometer": {
@@ -106,7 +106,7 @@
 	"plus": {
 		"splashscreen": {
 			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true
+			"waiting": false
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
@@ -189,5 +189,42 @@
 				}
 			}
 		}
-	},"fullscreen":false
+	},"fullscreen":false,
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"img/splash480x762.png",
+				"img/splash1080x1882.png",
+				"app.png",
+				"img/splash320x442.png",
+				"img/splash720x1242.png",
+				"img/splash240x282.png",
+				"js/mui.js",
+				"css/mui.css",
+				"README.md"
+			]
+		}
+	},
+	"unpackage":[
+	  "css/mui.css",
+	  "img/splash1080x1882.png",
+	  "img/splash240x282.png",
+	  "img/splash320x442.png",
+	  "img/splash480x762.png",
+	  "img/splash720x1242.png",
+	  "js/mui.js",
+	  "README.md",
+	  "app.png"
+	]
 }

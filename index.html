@@ -17,22 +17,21 @@
 	    <p>Blog：www.loveqiao.com</p>
 	</div>
 	<nav class="mui-bar mui-bar-tab">
-	    <a class="mui-tab-item mui-active" href="http://www.loveqiao.com">
+	    <a class="mui-tab-item mui-active" id="index">
 	        <span class="mui-icon mui-icon-home"></span>
 	        <span class="mui-tab-label">老徐BLOG</span>
 	    </a>
-	    <a class="mui-tab-item" href="http://weibo.com/qdlaoxu">
+	    <a class="mui-tab-item" id="weibo">
 	        <span class="mui-icon mui-icon-weibo"></span>
 	        <span class="mui-tab-label">老徐微博</span>
 	    </a>
-	    <a class="mui-tab-item" href="http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v10"> 
+	    <a class="mui-tab-item" id="resume"> 
 	        <span class="mui-icon mui-icon-contact"></span>
 	        <span class="mui-tab-label">关于老徐</span>
 	    </a>
 	</nav>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
-			var subpages = ['http://www.loveqiao.com', 'http://weibo.com/qdlaoxu', 'http://7xjqvv.com1.z0.glb.clouddn.com/resume-app.html?v10'];
 			var subpage_style = {
 				top: '0',
 				bottom: '50px'
@@ -40,66 +39,45 @@
 			var aniShow = {};
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
-				document.addEventListener( "netchange", function () {
-					var nt = plus.networkinfo.getCurrentType();
-					switch ( nt ) {
-						case plus.networkinfo.CONNECTION_ETHERNET:
-						case plus.networkinfo.CONNECTION_WIFI:
-						case plus.networkinfo.CONNECTION_CELL2G:
-						case plus.networkinfo.CONNECTION_CELL3G:
-						case plus.networkinfo.CONNECTION_CELL4G:
-							localStorage.setItem('net',true);
-							plus.nativeUI.toast('已连接至网络');
-							for (var n=0;n<3;n++) {//网络接通后重新加载页面
-								plus.webview.getWebviewById(subpages[n]).loadURL(subpages[n]);
-							}
-						break; 
-						default:
-							localStorage.setItem('net',false);
-							plus.nativeUI.toast('没有网络');
-						break;
-					}
-				}, false ); 
-				mui.trigger(document,'netchange');
-				
-				var self = plus.webview.currentWebview();
-				for (var i = 0; i < 3; i++) {
-					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
-					sub.setBounce({position:{top:"100px"},changeoffset:{top:"0"}});//回弹效果
-					if (i > 0) {
-						sub.hide();
-					}else{
-						//sub.evalJS('plus.nativeUI.closeWaiting()');
-						var temp = {};
-						temp[subpages[i]] = "true";
-						mui.extend(aniShow,temp);
-						sub.evalJS('plus.navigator.closeSplashscreen()');
-					}
-					self.append(sub);
+				switch ( plus.networkinfo.getCurrentType()) {
+					case plus.networkinfo.CONNECTION_ETHERNET:
+					case plus.networkinfo.CONNECTION_WIFI:
+					case plus.networkinfo.CONNECTION_CELL2G:
+					case plus.networkinfo.CONNECTION_CELL3G:
+					case plus.networkinfo.CONNECTION_CELL4G:
+						//有网
+					break; 
+					default:
+						alert('当前没有网络~');
+						plus.runtime.quit();
+						return;
+					break;
 				}
+				var self = plus.webview.currentWebview(),
+				web=[
+					mui.preload({url:'http://www.loveqiao.com',id:'index',styles:subpage_style}),
+					mui.preload({url:'http://weibo.com/qdlaoxu',id:'weibo',styles:subpage_style}),
+					mui.preload({url:'http://p.loveqiao.com/resume.html?v1',id:'resume',styles:subpage_style})
+				];
+				mui.each(web,function (i,d) {
+					d.setBounce({position:{top:"100px"},changeoffset:{top:"0"}});
+					if(i==0){
+						d.addEventListener('loaded',function(){
+							d.show();
+							plus.navigator.closeSplashscreen()
+						});
+					}
+				})
 			});
-			 //当前激活选项
-			var activeTab = subpages[0];
-			//var title = document.getElementById("title");
 			 //选项卡点击事件
+			var activeTab='index';
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
-				var targetTab = this.getAttribute('href');
+				var targetTab = this.id;
 				if (targetTab == activeTab) {
 					return;
 				}
-				//更换标题
-				//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
 				//显示目标选项卡
-				if(mui.os.ios||aniShow[targetTab]){
-					plus.webview.show(targetTab);
-				}else{
-					plus.nativeUI.showWaiting('',{background:'rgba(0,0,0,.5)'});
-					var temp = {};
-					temp[targetTab] = "true";
-					mui.extend(aniShow,temp);
-					plus.webview.show(targetTab,"fade-in",300);
-					plus.webview.getWebviewById(targetTab).evalJS('plus.nativeUI.closeWaiting()');
-				}
+				plus.webview.show(targetTab);
 				//隐藏当前;
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
